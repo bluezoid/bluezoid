@@ -47,13 +47,16 @@ const footerLinks = {
   ],
 };
 
-const socialLinks = [
-  { Icon: XIcon, href: siteConfig.links.twitter, label: "X (Twitter)" },
-  { Icon: GitHubIcon, href: siteConfig.links.github, label: "GitHub" },
-  { Icon: LinkedInIcon, href: siteConfig.links.linkedin, label: "LinkedIn" },
-];
+interface FooterProps {
+  socialLinks: { twitter: string; github: string; linkedin: string };
+}
 
-export function Footer() {
+export function Footer({ socialLinks }: FooterProps) {
+  const socials = [
+    { Icon: XIcon, href: socialLinks.twitter, label: "X (Twitter)" },
+    { Icon: GitHubIcon, href: socialLinks.github, label: "GitHub" },
+    { Icon: LinkedInIcon, href: socialLinks.linkedin, label: "LinkedIn" },
+  ];
   return (
     <footer className="relative border-t border-white/6" style={{ background: "oklch(0.03 0.008 250)" }}>
       {/* Top CTA strip */}
@@ -102,7 +105,7 @@ export function Footer() {
               </div>
             </div>
             <div className="mt-6 flex gap-2">
-              {socialLinks.map(({ Icon, href, label }) => (
+              {socials.map(({ Icon, href, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                   className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-white/30 transition-all hover:border-sky-500/40 hover:bg-sky-500/10 hover:text-sky-400">
                   <Icon className="h-3.5 w-3.5" />

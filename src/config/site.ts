@@ -15,11 +15,6 @@ export const siteConfig = {
     "BlueZoid",
   ],
   ogImage: "https://bluezoid.in/og.png",
-  links: {
-    twitter: "https://twitter.com/bluezoid",
-    github: "https://github.com/bluezoid",
-    linkedin: "https://linkedin.com/company/bluezoid",
-  },
   contact: {
     email: "hello@bluezoid.in",
     phone: null,
