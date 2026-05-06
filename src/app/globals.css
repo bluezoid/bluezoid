@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  /* Brand blues — lighter, sky-adjacent */
+  --color-bz-50: var(--bz-50);
+  --color-bz-100: var(--bz-100);
+  --color-bz-200: var(--bz-200);
+  --color-bz-300: var(--bz-300);
+  --color-bz-400: var(--bz-400);
+  --color-bz-500: var(--bz-500);
+  --color-bz-600: var(--bz-600);
+  --color-bz-700: var(--bz-700);
+  --color-bz-800: var(--bz-800);
+  --color-bz-900: var(--bz-900);
+}
+
+:root {
+  --background: oklch(0.04 0.01 250);
+  --foreground: oklch(0.97 0.005 240);
+  --card: oklch(0.07 0.012 250);
+  --card-foreground: oklch(0.97 0.005 240);
+  --primary: oklch(0.62 0.18 235);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.1 0.015 250);
+  --secondary-foreground: oklch(0.85 0.01 240);
+  --muted: oklch(0.1 0.012 250);
+  --muted-foreground: oklch(0.55 0.02 240);
+  --accent: oklch(0.12 0.018 250);
+  --accent-foreground: oklch(0.9 0.01 240);
+  --destructive: oklch(0.65 0.24 25);
+  --border: oklch(0.18 0.02 250);
+  --input: oklch(0.12 0.015 250);
+  --ring: oklch(0.62 0.18 235);
+  --radius: 0.75rem;
+
+  /* BlueZoid lighter brand palette — sky blue range */
+  --bz-50: oklch(0.97 0.04 225);
+  --bz-100: oklch(0.92 0.08 225);
+  --bz-200: oklch(0.84 0.12 228);
+  --bz-300: oklch(0.74 0.15 230);
+  --bz-400: oklch(0.64 0.17 233);
+  --bz-500: oklch(0.55 0.18 235);
+  --bz-600: oklch(0.46 0.17 237);
+  --bz-700: oklch(0.37 0.15 240);
+  --bz-800: oklch(0.27 0.11 245);
+  --bz-900: oklch(0.17 0.07 250);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-color: oklch(0.04 0.01 250);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: oklch(0.62 0.18 235 / 0.35);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(0.06 0.01 250);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.25 0.06 235);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.45 0.12 235);
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism */
+  .glass {
+    background: oklch(1 0 0 / 0.04);
+    border: 1px solid oklch(1 0 0 / 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .glass-strong {
+    background: oklch(1 0 0 / 0.07);
+    border: 1px solid oklch(1 0 0 / 0.12);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+  }
+  .glass-card {
+    background: linear-gradient(135deg, oklch(1 0 0 / 0.06) 0%, oklch(1 0 0 / 0.02) 100%);
+    border: 1px solid oklch(1 0 0 / 0.1);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  /* Brand gradients — lighter blue range */
+  .gradient-bz {
+    background: linear-gradient(135deg, oklch(0.64 0.17 233) 0%, oklch(0.74 0.15 210) 100%);
+  }
+  .gradient-bz-text {
+    background: linear-gradient(135deg, oklch(0.74 0.15 230) 0%, oklch(0.84 0.12 210) 50%, oklch(0.78 0.14 250) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .gradient-bz-text-vibrant {
+    background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 40%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .gradient-hero-bg {
+    background: radial-gradient(ellipse 80% 50% at 50% -10%, oklch(0.45 0.15 235 / 0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, oklch(0.55 0.14 260 / 0.15) 0%, transparent 60%),
+                oklch(0.04 0.01 250);
+  }
+
+  /* Noise texture overlay */
+  .noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow effects */
+  .glow-bz {
+    box-shadow: 0 0 40px oklch(0.62 0.18 235 / 0.3), 0 0 80px oklch(0.62 0.18 235 / 0.1);
+  }
+  .glow-bz-sm {
+    box-shadow: 0 0 20px oklch(0.62 0.18 235 / 0.25);
+  }
+  .text-glow {
+    text-shadow: 0 0 40px oklch(0.74 0.15 230 / 0.6);
+  }
+
+  /* Border gradient */
+  .border-gradient {
+    border: 1px solid transparent;
+    background: linear-gradient(oklch(0.07 0.012 250), oklch(0.07 0.012 250)) padding-box,
+                linear-gradient(135deg, oklch(0.64 0.17 233 / 0.4), oklch(0.74 0.15 210 / 0.1)) border-box;
+  }
+
+  /* Animated gradient border */
+  .border-animated {
+    position: relative;
+  }
+  .border-animated::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, oklch(0.64 0.17 233), oklch(0.8 0.1 280), oklch(0.7 0.15 200), oklch(0.64 0.17 233));
+    background-size: 300% 100%;
+    animation: borderSpin 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+  }
+  .border-animated:hover::before {
+    opacity: 1;
+  }
+
+  /* Mesh gradient blob */
+  .mesh-blob {
+    background: conic-gradient(from 90deg at 50% 50%, oklch(0.55 0.18 235 / 0.4), oklch(0.65 0.14 270 / 0.3), oklch(0.7 0.12 200 / 0.35), oklch(0.55 0.18 235 / 0.4));
+    filter: blur(60px);
+    border-radius: 50%;
+  }
+
+  /* Number highlight */
+  .num-highlight {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  /* Marquee */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes borderSpin {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(1deg); }
+  66% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@layer utilities {
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-float-delayed { animation: float 6s ease-in-out infinite 2s; }
+  .animate-pulse-ring { animation: pulse-ring 2s ease-out infinite; }
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent 0%, oklch(1 0 0 / 0.06) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+  }
+  .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+}
