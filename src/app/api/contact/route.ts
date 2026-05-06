@@ -63,7 +63,7 @@ function adminEmailTemplate(d: { name: string; email: string; subject: string; m
           <p style="margin: 0; white-space: pre-wrap;">${escapeHtml(d.message)}</p>
         </div>
       </div>
-      <p style="color: #64748b; font-size: 12px; margin-top: 24px; text-align: center;">BlueZoid.in · Bengaluru, India</p>
+      <p style="color: #64748b; font-size: 12px; margin-top: 24px; text-align: center;">BlueZoid.in · Kolkata, West Bengal, India (Remote)</p>
     </div>`;
 }
 
@@ -81,7 +81,7 @@ function autoReplyTemplate(d: { name: string; message: string }) {
           <p style="margin: 0; font-style: italic; color: #64748b;">Your message: "${escapeHtml(preview)}"</p>
         </div>
       </div>
-      <p style="color: #64748b; font-size: 12px; margin-top: 24px; text-align: center;">BlueZoid.in · hello@bluezoid.in · Bengaluru, India</p>
+      <p style="color: #64748b; font-size: 12px; margin-top: 24px; text-align: center;">BlueZoid.in · hello@bluezoid.in · Kolkata, West Bengal, India (Remote)</p>
     </div>`;
 }
 

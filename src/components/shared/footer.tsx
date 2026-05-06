@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone, ArrowRight } from "lucide-react";
+import { Mail, MapPin, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Container } from "./container";
 
@@ -41,6 +41,9 @@ const footerLinks = {
   Legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
+    { label: "Refund & Cancellation", href: "/refund" },
+    { label: "Shipping & Delivery", href: "/shipping" },
+    { label: "hello@bluezoid.in", href: "/contact-email" },
   ],
 };
 
@@ -93,9 +96,7 @@ export function Footer() {
               <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-2 text-xs text-white/30 hover:text-sky-400 transition-colors">
                 <Mail className="h-3.5 w-3.5" />{siteConfig.contact.email}
               </a>
-              <div className="flex items-center gap-2 text-xs text-white/30">
-                <Phone className="h-3.5 w-3.5" />{siteConfig.contact.phone}
-              </div>
+
               <div className="flex items-center gap-2 text-xs text-white/30">
                 <MapPin className="h-3.5 w-3.5" />{siteConfig.contact.address}
               </div>

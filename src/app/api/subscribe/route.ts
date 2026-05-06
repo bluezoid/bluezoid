@@ -65,7 +65,7 @@ function welcomeTemplate() {
         </div>
       </div>
       <p style="color: #64748b; font-size: 12px; margin-top: 24px; text-align: center;">
-        BlueZoid.in · hello@bluezoid.in · Bengaluru, India
+        BlueZoid.in · hello@bluezoid.in · Kolkata, West Bengal, India (Remote)
       </p>
     </div>`;
 }

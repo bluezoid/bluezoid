@@ -22,8 +22,8 @@ export const siteConfig = {
   },
   contact: {
     email: "hello@bluezoid.in",
-    phone: "+91 98765 43210",
-    address: "Bengaluru, Karnataka, India",
+    phone: null,
+    address: "Kolkata, West Bengal, India (Remote)",
   },
   nav: [
     { label: "Home", href: "/" },

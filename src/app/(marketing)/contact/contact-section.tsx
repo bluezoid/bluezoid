@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { DayPicker } from "react-day-picker";
 import { format, addDays, isWeekend } from "date-fns";
 import {
-  Mail, MapPin, Phone, Clock, CheckCircle2, ArrowRight, ArrowLeft,
+  Mail, MapPin, Clock, CheckCircle2, ArrowRight, ArrowLeft,
   ChevronLeft, ChevronRight, Loader2, User, Building, MessageSquare
 } from "lucide-react";
 import { Section } from "@/components/shared/section";
@@ -33,7 +33,7 @@ const BUDGETS = [
 
 const contactInfo = [
   { icon: Mail, label: "Email", value: siteConfig.contact.email, href: `mailto:${siteConfig.contact.email}` },
-  { icon: Phone, label: "Phone", value: siteConfig.contact.phone, href: `tel:${siteConfig.contact.phone.replace(/\s/g, "")}` },
+
   { icon: MapPin, label: "Location", value: siteConfig.contact.address, href: null },
   { icon: Clock, label: "Response", value: "Within 24 hours", href: null },
 ];
