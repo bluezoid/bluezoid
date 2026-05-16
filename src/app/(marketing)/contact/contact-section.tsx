@@ -90,8 +90,8 @@ function StepForm() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {field("name", "Full Name", <User className="h-4 w-4" />, { placeholder: "Arjun Mehta" })}
-        {field("email", "Email Address", <Mail className="h-4 w-4" />, { type: "email", placeholder: "arjun@company.com" })}
+        {field("name", "Full Name *", <User className="h-4 w-4" />, { placeholder: "Arjun Mehta" })}
+        {field("email", "Email Address *", <Mail className="h-4 w-4" />, { type: "email", placeholder: "arjun@company.com" })}
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {field("phone", "Mobile Number *", <Phone className="h-4 w-4" />, { type: "tel", placeholder: "+91 98765 43210" })}
