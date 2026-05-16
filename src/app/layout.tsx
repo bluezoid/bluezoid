@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 
@@ -84,6 +85,7 @@ export default function RootLayout({
         style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
