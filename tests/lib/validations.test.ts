@@ -20,6 +20,7 @@ describe("contactSchema", () => {
   const valid = {
     name: "Jane Doe",
     email: "jane@example.com",
+    phone: "+91 98765 43210",
     subject: "Project inquiry",
     message: "I'd like to discuss building a SaaS platform for our team.",
   };

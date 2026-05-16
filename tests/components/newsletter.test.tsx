@@ -4,8 +4,13 @@ import userEvent from "@testing-library/user-event";
 import { Newsletter } from "@/components/sections/newsletter";
 import { useSubscribeStore } from "@/stores/subscribe-store";
 
+const subscriberCountResponse = () =>
+  new Response(JSON.stringify({ count: 1200 }), { status: 200 });
+
 beforeEach(() => {
   useSubscribeStore.getState().reset();
+  // always resolve the subscriber-count background fetch
+  vi.spyOn(globalThis, "fetch").mockResolvedValue(subscriberCountResponse());
 });
 
 afterEach(() => {
@@ -31,11 +36,13 @@ describe("<Newsletter />", () => {
   });
 
   it("posts to /api/subscribe and reports success", async () => {
-    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response(JSON.stringify({ ok: true, data: { subscribed: true, alreadyExists: false } }), {
-        status: 200,
-      })
-    );
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockImplementation((url) => {
+      if (typeof url === "string" && url.includes("subscriber-count"))
+        return Promise.resolve(subscriberCountResponse());
+      return Promise.resolve(
+        new Response(JSON.stringify({ ok: true, data: { subscribed: true, alreadyExists: false } }), { status: 200 })
+      );
+    });
     const user = userEvent.setup();
     render(<Newsletter />);
     const input = screen.getByPlaceholderText(/you@company\.com/i);
@@ -53,12 +60,16 @@ describe("<Newsletter />", () => {
   });
 
   it("surfaces API error messages", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValue(
-      new Response(
-        JSON.stringify({ ok: false, error: { code: "delivery_failed", message: "Upstream down" } }),
-        { status: 502 }
-      )
-    );
+    vi.spyOn(globalThis, "fetch").mockImplementation((url) => {
+      if (typeof url === "string" && url.includes("subscriber-count"))
+        return Promise.resolve(subscriberCountResponse());
+      return Promise.resolve(
+        new Response(
+          JSON.stringify({ ok: false, error: { code: "delivery_failed", message: "Upstream down" } }),
+          { status: 502 }
+        )
+      );
+    });
     const user = userEvent.setup();
     render(<Newsletter />);
     const input = screen.getByPlaceholderText(/you@company\.com/i);

@@ -6,7 +6,7 @@ import { DayPicker } from "react-day-picker";
 import { format, addDays, isWeekend } from "date-fns";
 import {
   Mail, MapPin, Clock, CheckCircle2, ArrowRight, ArrowLeft,
-  ChevronLeft, ChevronRight, Loader2, User, Building, MessageSquare
+  ChevronLeft, ChevronRight, Loader2, User, Building, MessageSquare, Phone
 } from "lucide-react";
 import { Section } from "@/components/shared/section";
 import { useBookingStore } from "@/stores/booking-store";
@@ -53,6 +53,8 @@ function StepForm() {
     const e: Record<string, string> = {};
     if (!formData.name.trim()) e.name = "Name is required";
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) e.email = "Valid email required";
+    if (!formData.phone.trim()) e.phone = "Mobile number is required";
+    else if (!formData.phone.match(/^[+\d][\d\s\-()]{7,19}$/)) e.phone = "Enter a valid mobile number";
     if (!formData.service) e.service = "Please select a service";
     if (!formData.message.trim() || formData.message.length < 20) e.message = "At least 20 characters";
     setErrors(e);
@@ -91,7 +93,10 @@ function StepForm() {
         {field("name", "Full Name", <User className="h-4 w-4" />, { placeholder: "Arjun Mehta" })}
         {field("email", "Email Address", <Mail className="h-4 w-4" />, { type: "email", placeholder: "arjun@company.com" })}
       </div>
-      {field("company", "Company (optional)", <Building className="h-4 w-4" />, { placeholder: "Your Company" })}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {field("phone", "Mobile Number *", <Phone className="h-4 w-4" />, { type: "tel", placeholder: "+91 98765 43210" })}
+        {field("company", "Company (optional)", <Building className="h-4 w-4" />, { placeholder: "Your Company" })}
+      </div>
 
       {/* Service selector */}
       <div className="space-y-1.5">
@@ -262,8 +267,9 @@ function StepConfirm() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
+          phone: formData.phone,
           subject: `Booking Request: ${formData.service} | ${formData.selectedDate ? format(formData.selectedDate, "MMM d") : ""} ${formData.selectedTime}`,
-          message: `Company: ${formData.company || "N/A"}\nService: ${formData.service}\nBudget: ${formData.budget || "Not specified"}\nPreferred Date: ${formData.selectedDate ? format(formData.selectedDate, "EEEE, MMMM d, yyyy") : "N/A"}\nPreferred Time: ${formData.selectedTime}\n\nProject Brief:\n${formData.message}`,
+          message: `Company: ${formData.company || "N/A"}\nMobile: ${formData.phone}\nService: ${formData.service}\nBudget: ${formData.budget || "Not specified"}\nPreferred Date: ${formData.selectedDate ? format(formData.selectedDate, "EEEE, MMMM d, yyyy") : "N/A"}\nPreferred Time: ${formData.selectedTime}\n\nProject Brief:\n${formData.message}`,
         }),
       });
       const j = await res.json();
@@ -292,6 +298,7 @@ function StepConfirm() {
   const items = [
     { label: "Name", value: formData.name },
     { label: "Email", value: formData.email },
+    { label: "Mobile", value: formData.phone },
     { label: "Company", value: formData.company || "—" },
     { label: "Service", value: formData.service },
     { label: "Budget", value: formData.budget || "—" },

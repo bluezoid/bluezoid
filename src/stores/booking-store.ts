@@ -11,6 +11,7 @@ export type TimeSlot = {
 export type BookingFormData = {
   name: string;
   email: string;
+  phone: string;
   company: string;
   service: string;
   budget: string;
@@ -39,6 +40,7 @@ type BookingState = {
 const initialFormData: BookingFormData = {
   name: "",
   email: "",
+  phone: "",
   company: "",
   service: "",
   budget: "",
