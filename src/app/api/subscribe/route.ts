@@ -45,6 +45,10 @@ function welcomeTemplate() {
   return `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 32px; background: #f8fafc; border-radius: 12px;">
       <div style="background: linear-gradient(135deg, #0ea5e9, #6366f1); padding: 32px; border-radius: 8px; margin-bottom: 24px; text-align: center;">
+        <div style="display: inline-flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+          <img src="https://bluezoid.in/email-logo-80.png" alt="BlueZoid" width="48" height="48" style="border-radius: 10px; display: block;" />
+          <span style="color: white; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; font-family: sans-serif;">BlueZoid</span>
+        </div>
         <h1 style="color: white; margin: 0 0 8px; font-size: 28px;">Welcome to BlueZoid</h1>
         <p style="color: #bae6fd; margin: 0; font-size: 16px;">Build. Scale. Dominate.</p>
       </div>

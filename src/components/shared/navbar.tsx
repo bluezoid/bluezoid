@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
@@ -12,24 +13,21 @@ function BZLogo() {
   return (
     <Link href="/" className="group flex items-center gap-2.5">
       <div className="relative">
-        <svg width="34" height="34" viewBox="0 0 64 64" fill="none" className="transition-transform duration-300 group-hover:scale-110">
-          <defs>
-            <linearGradient id="nav-bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#38bdf8" />
-              <stop offset="100%" stopColor="#6366f1" />
-            </linearGradient>
-          </defs>
-          <rect width="64" height="64" rx="16" fill="url(#nav-bg)" />
-          <path d="M14 18h36l-28 28h28" stroke="white" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" />
-          <circle cx="50" cy="14" r="4" fill="white" opacity="0.9" />
-        </svg>
-        <span className="absolute -right-1 -top-1 h-2 w-2 rounded-full bg-sky-400 ring-2 ring-black animate-pulse" />
+        <Image
+          src="/logo-512.png"
+          alt="BlueZoid"
+          width={46}
+          height={46}
+          priority
+          className="rounded-2xl transition-transform duration-300 group-hover:scale-110"
+        />
+        <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-sky-400 ring-2 ring-black animate-pulse" />
       </div>
       <div className="flex flex-col leading-none">
-        <span className="text-[15px] font-bold tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
-          Blue<span className="text-sky-400">Zoid</span>
+        <span className="text-[20px] font-black tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
+          BlueZoid
         </span>
-        <span className="text-[9px] font-medium tracking-[0.18em] text-white/30 uppercase">Software</span>
+        <span className="text-[9px] font-semibold tracking-[0.2em] text-white/25 uppercase">Software</span>
       </div>
     </Link>
   );

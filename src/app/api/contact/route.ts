@@ -72,6 +72,10 @@ function adminEmailTemplate(d: { name: string; email: string; phone: string; sub
 
     <!-- Header -->
     <div style="background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%); border-radius: 16px 16px 0 0; padding: 36px 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+        <img src="https://bluezoid.in/email-logo-80.png" alt="BlueZoid" width="48" height="48" style="border-radius: 10px; display: block;" />
+        <span style="color: white; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; font-family: sans-serif;">BlueZoid</span>
+      </div>
       <div style="display: inline-block; background: rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 14px; margin-bottom: 16px;">
         <span style="color: #bae6fd; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">New Inquiry</span>
       </div>
@@ -132,6 +136,10 @@ function autoReplyTemplate(d: { name: string; message: string }) {
 
     <!-- Header -->
     <div style="background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%); border-radius: 16px 16px 0 0; padding: 36px 32px; text-align: center;">
+      <div style="display: inline-flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+        <img src="https://bluezoid.in/email-logo-80.png" alt="BlueZoid" width="48" height="48" style="border-radius: 10px; display: block;" />
+        <span style="color: white; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; font-family: sans-serif;">BlueZoid</span>
+      </div>
       <h1 style="color: white; margin: 0 0 8px; font-size: 26px; font-weight: 800;">Thanks for reaching out, ${escapeHtml(d.name)}!</h1>
       <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 15px;">We've received your message and will get back to you shortly.</p>
     </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Container } from "./container";
@@ -77,19 +78,15 @@ export function Footer({ socialLinks }: FooterProps) {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="group flex w-fit items-center gap-3 mb-5">
-              <svg width="36" height="36" viewBox="0 0 64 64" fill="none">
-                <defs>
-                  <linearGradient id="foot-bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#38bdf8" />
-                    <stop offset="100%" stopColor="#6366f1" />
-                  </linearGradient>
-                </defs>
-                <rect width="64" height="64" rx="16" fill="url(#foot-bg)" />
-                <path d="M14 18h36l-28 28h28" stroke="white" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="50" cy="14" r="4" fill="white" opacity="0.9" />
-              </svg>
-              <span className="text-3xl font-black tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
-                Blue<span className="text-sky-400">Zoid</span>
+              <Image
+                src="/logo-512.png"
+                alt="BlueZoid"
+                width={44}
+                height={44}
+                className="rounded-xl"
+              />
+              <span className="text-4xl font-black tracking-tight text-white" style={{ fontFamily: "var(--font-display)" }}>
+                BlueZoid
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-white/30 max-w-xs">
