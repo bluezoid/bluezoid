@@ -1,0 +1,160 @@
+// Seeds the original 4 case studies into MongoDB.
+// Run with: node --env-file=.env.local scripts/seed-projects.mjs
+import { MongoClient } from "mongodb";
+
+const uri = process.env.MONGODB_URI;
+const dbName = process.env.MONGODB_DB || "bluezoid";
+
+if (!uri) {
+  console.error("Missing MONGODB_URI — run with: node --env-file=.env.local scripts/seed-projects.mjs");
+  process.exit(1);
+}
+
+const now = new Date();
+
+const projects = [
+  {
+    slug: "finova-tech-saas-platform",
+    title: "FINOVA TECH SAAS PLATFORM",
+    client: "FINOVA TECH",
+    category: "SAAS DEVELOPMENT",
+    tagLabel: "SAAS PLATFORM",
+    tagline: "FOR FINOVA TECH // MONOLITH REBUILT INTO SCALABLE SAAS",
+    timeline: "12 WEEKS",
+    stack: ["NEXT.JS", "TYPESCRIPT", "POSTGRES", "STRIPE BILLING"],
+    summary:
+      "WE REBUILT FINOVA TECH'S ENTIRE PLATFORM FROM A LEGACY MONOLITH INTO A MULTI-TENANT SAAS ARCHITECTURE WITH BILLING, RBAC, AND AN ADMIN DASHBOARD.",
+    overview: [
+      "FINOVA TECH CAME TO US WITH A MONOLITHIC RAILS APP THAT COULDN'T SCALE PAST THEIR EARLY CUSTOMERS. EVERY NEW ENTERPRISE CLIENT MEANT MORE MANUAL CONFIGURATION AND MORE FRAGILE INFRASTRUCTURE.",
+      "WE RE-ARCHITECTED THE SYSTEM AROUND A PROPER MULTI-TENANT MODEL — ISOLATED DATA PER ORGANIZATION, ROLE-BASED ACCESS CONTROL, AND A METERED BILLING ENGINE BUILT ON STRIPE. THE MIGRATION RAN IN PARALLEL WITH THE LEGACY SYSTEM, WITH ZERO DOWNTIME FOR EXISTING CUSTOMERS.",
+      "POST-LAUNCH, FINOVA TECH ONBOARDED THREE NEW ENTERPRISE ACCOUNTS IN THE FIRST MONTH ALONE — SOMETHING THAT WAS PREVIOUSLY A MULTI-WEEK MANUAL EFFORT PER CLIENT.",
+    ],
+    results: [
+      { value: "3X", label: "FASTER ONBOARDING" },
+      { value: "99%", label: "UPTIME SINCE LAUNCH" },
+      { value: "0", label: "MINUTES OF DOWNTIME" },
+      { value: "12WK", label: "FROM SCOPE TO SHIP" },
+    ],
+    testimonial: {
+      quote:
+        "BLUEZOID REBUILT OUR ENTIRE PLATFORM FROM A MONOLITH TO A SCALABLE SAAS ARCHITECTURE. DELIVERY WAS ON TIME, CODE QUALITY WAS EXCEPTIONAL, AND THE TEAM WAS COMMUNICATIVE THROUGHOUT.",
+      name: "PRIYA SHARMA",
+      role: "CTO, FINOVA TECH",
+    },
+  },
+  {
+    slug: "shopbolt-storefront",
+    title: "SHOPBOLT STOREFRONT",
+    client: "SHOPBOLT",
+    category: "E-COMMERCE",
+    tagLabel: "E-COMMERCE",
+    tagline: "FOR SHOPBOLT // ZERO TO LAUNCH IN 6 WEEKS",
+    timeline: "6 WEEKS",
+    stack: ["NEXT.JS", "HEADLESS COMMERCE", "TAILWIND", "RAZORPAY"],
+    summary:
+      "A HEADLESS STOREFRONT BUILT FROM SCRATCH — BLAZING-FAST PAGES, INTEGRATED PAYMENTS, AND A CHECKOUT FLOW TUNED FOR CONVERSION.",
+    overview: [
+      "SHOPBOLT NEEDED TO GO FROM IDEA TO A FULLY FUNCTIONAL STORE IN UNDER TWO MONTHS, AHEAD OF A SEASONAL LAUNCH WINDOW THEY COULDN'T MISS.",
+      "WE BUILT A HEADLESS COMMERCE STOREFRONT ON NEXT.JS WITH STATIC PRODUCT PAGES, EDGE-CACHED CATALOG DATA, AND A STREAMLINED CHECKOUT INTEGRATED DIRECTLY WITH RAZORPAY. EVERY SCREEN WAS BUILT MOBILE-FIRST SINCE OVER 80% OF SHOPBOLT'S TRAFFIC COMES FROM PHONES.",
+      "THE STORE SHIPPED ON SCHEDULE, HANDLING LAUNCH-DAY TRAFFIC WITHOUT A SINGLE PERFORMANCE INCIDENT.",
+    ],
+    results: [
+      { value: "6WK", label: "ZERO TO LAUNCH" },
+      { value: "<1S", label: "PAGE LOAD TIME" },
+      { value: "80%", label: "MOBILE TRAFFIC SHARE" },
+      { value: "0", label: "LAUNCH-DAY INCIDENTS" },
+    ],
+    testimonial: {
+      quote:
+        "WE WENT FROM ZERO TO A FULLY FUNCTIONAL E-COMMERCE PLATFORM IN 6 WEEKS. THE ATTENTION TO PERFORMANCE AND UX DETAIL WAS SOMETHING WE HADN'T SEEN FROM ANY AGENCY BEFORE.",
+      name: "ARJUN MEHTA",
+      role: "FOUNDER, SHOPBOLT",
+    },
+  },
+  {
+    slug: "datasync-api",
+    title: "DATASYNC DATA API",
+    client: "DATASYNC",
+    category: "API & BACKEND",
+    tagLabel: "API & BACKEND",
+    tagline: "FOR DATASYNC // MILLIONS OF REQUESTS DAILY, ROCK SOLID",
+    timeline: "10 WEEKS",
+    stack: ["NODE.JS", "POSTGRES", "REDIS CACHE", "REST + WEBHOOKS"],
+    summary:
+      "A SCALABLE REST API HANDLING MILLIONS OF DAILY REQUESTS WITH SUB-100MS LATENCY AND ROCK-SOLID RELIABILITY.",
+    overview: [
+      "DATASYNC'S EXISTING API WAS BUCKLING UNDER GROWTH — SLOW QUERIES, INCONSISTENT WEBHOOK DELIVERY, AND NO CLEAR PATH TO SCALE BEYOND THEIR CURRENT LOAD.",
+      "WE REBUILT THE API LAYER FROM THE GROUND UP: NORMALIZED DATABASE SCHEMA, A REDIS CACHING LAYER FOR HOT PATHS, AND A RELIABLE WEBHOOK DISPATCH SYSTEM WITH RETRIES AND DEAD-LETTER HANDLING. FULL DOCUMENTATION SHIPPED ALONGSIDE THE CODE.",
+      "THE NEW API NOW HANDLES MILLIONS OF REQUESTS DAILY ACROSS DATASYNC'S CUSTOMER BASE WITHOUT DEGRADATION, AND SCALING FOR THEIR NEXT GROWTH PHASE IS A NON-EVENT.",
+    ],
+    results: [
+      { value: "5M+", label: "REQUESTS / DAY" },
+      { value: "<100MS", label: "P95 LATENCY" },
+      { value: "99.9%", label: "DELIVERY SUCCESS" },
+      { value: "10WK", label: "REBUILD TIMELINE" },
+    ],
+    testimonial: {
+      quote:
+        "THE API THEY BUILT HANDLES MILLIONS OF REQUESTS DAILY WITH ROCK-SOLID RELIABILITY. THEIR ARCHITECTURE CHOICES MADE SCALING EFFORTLESS WHEN WE HIT OUR GROWTH PHASE.",
+      name: "SARAH CHEN",
+      role: "VP ENGINEERING, DATASYNC",
+    },
+  },
+  {
+    slug: "learnflow-platform",
+    title: "LEARNFLOW LEARNING PLATFORM",
+    client: "LEARNFLOW",
+    category: "WEB APPLICATIONS",
+    tagLabel: "WEB APP",
+    tagline: "FOR LEARNFLOW // SHIPPED CLARITY BEFORE CODE",
+    timeline: "8 WEEKS",
+    stack: ["NEXT.JS", "TYPESCRIPT", "POSTGRES", "VIDEO STREAMING"],
+    summary:
+      "A TECH CONSULTING ENGAGEMENT THAT BECAME A FULL BUILD — A COURSE PLATFORM WITH VIDEO, PROGRESS TRACKING, AND COHORT MANAGEMENT.",
+    overview: [
+      "LEARNFLOW FIRST CAME TO US FOR ARCHITECTURE CONSULTING — THEY WERE ABOUT TO COMMIT TO A STACK THAT WOULDN'T HAVE SUPPORTED THEIR COHORT-BASED COURSE MODEL AT SCALE.",
+      "AFTER THE AUDIT, WE STAYED ON TO BUILD THE PLATFORM: VIDEO LESSON DELIVERY, PROGRESS TRACKING, AND COHORT SCHEDULING, ALL BUILT ON A STACK THAT MATCHED WHERE THEY WERE HEADED, NOT JUST WHERE THEY WERE STARTING.",
+      "THE CONSULTING-FIRST APPROACH SAVED LEARNFLOW MONTHS OF REWORK THEY WOULD HAVE HIT SIX MONTHS INTO A WRONG-STACK BUILD.",
+    ],
+    results: [
+      { value: "8WK", label: "CONSULT TO LAUNCH" },
+      { value: "6MO", label: "REWORK TIME SAVED" },
+      { value: "100%", label: "COHORT FEATURE PARITY" },
+      { value: "0", label: "STACK REWRITES SINCE" },
+    ],
+    testimonial: {
+      quote:
+        "BLUEZOID'S CONSULTING GAVE US CLARITY ON OUR TECH STACK BEFORE WE WASTED MONTHS GOING THE WRONG DIRECTION. WORTH EVERY RUPEE — PROBABLY SAVED US 6 MONTHS OF DEV TIME.",
+      name: "ROHAN PATEL",
+      role: "CO-FOUNDER, LEARNFLOW",
+    },
+  },
+].map((p, i) => ({ ...p, order: i, createdAt: now, updatedAt: now }));
+
+const client = new MongoClient(uri);
+
+async function main() {
+  await client.connect();
+  const db = client.db(dbName);
+  const col = db.collection("projects");
+
+  await col.createIndex({ slug: 1 }, { unique: true });
+
+  for (const project of projects) {
+    await col.updateOne(
+      { slug: project.slug },
+      { $set: project },
+      { upsert: true }
+    );
+    console.log(`Upserted: ${project.slug}`);
+  }
+
+  console.log(`Done. ${projects.length} projects seeded into "${dbName}.projects".`);
+}
+
+main()
+  .catch((err) => {
+    console.error(err);
+    process.exitCode = 1;
+  })
+  .finally(() => client.close());
